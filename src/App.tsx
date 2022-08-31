@@ -1,7 +1,8 @@
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
+
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -21,22 +22,33 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Home from './pages/Home';
+import About from './pages/About';
+import {Menu} from './components/Menu/Menu';
+import TituloPelicula from './pages/TituloPelicula';
+
 
 setupIonicReact();
 
-const App: React.FC = () => (
+const App: React.FC = () => {
+  return (
+    <>
+  
   <IonApp>
     <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
+    <Menu />
+    
+      <IonRouterOutlet id="first">
+      <Route  path="/home-peliculas" component={Home} exact/>
+        <Route  path="/titulo-pelicula" component={TituloPelicula} exact/>        
+        <Route  path="/about" component={About} exact/>    
+        
+        <Redirect to="/home-peliculas"/>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
-);
+  </>
+  );
+  }
 
 export default App;
